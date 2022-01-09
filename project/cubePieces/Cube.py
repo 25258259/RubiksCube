@@ -80,7 +80,7 @@ class Cube:
         elif len(path) != 0:
             self.fromJson(path)
         else:
-            self.setAllNormal()
+            self.setDefault()
 
 
     def fromJson(self, jsonFile: str):
@@ -174,8 +174,8 @@ class Cube:
 
         return cube
 
-    def setAllNormal(self):
-        self.fromJson('../basicJsons/normalSet.json')
+    def setDefault(self):
+        self.fromJson('project/basicJsons/normalSet.json')
 
 
     def rotation(self, rotationType: str):
@@ -191,7 +191,7 @@ class Cube:
                                        self.tiles[borderNumbers[6]], self.tiles[borderNumbers[7]]
 
         if len(cornerRotations) == 0:
-            for i in cornerRotations[:4]:
+            for i in cornerNumbers[:4]:
                 self.tiles[i].flip()
         else:
             for i in borderNumbers[:4]:

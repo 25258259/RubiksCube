@@ -1,7 +1,7 @@
 import json
 
 
-from project.cubePieces.Tiles import middleTile, borderTile, cornerTile
+from project.cubePieces.Tiles import MiddleTile, BorderTile, CornerTile
 
 
 class Cube:
@@ -28,49 +28,16 @@ class Cube:
     }
 
     def __str__(self):
-        frontSide = 'Front side:\n'
-        frontSide += f"['{self.tiles[0].thirdColor}', '{self.tiles[1].firstColor}', '" \
-                     f"{self.tiles[2].thirdColor}'],\n['{self.tiles[3].secondColor}', " \
-                     f"'{self.tiles[4].color}', '{self.tiles[5].secondColor}'],\n['" \
-                     f"{self.tiles[6].thirdColor}', '{self.tiles[7].firstColor}', '" \
-                     f"{self.tiles[8].thirdColor}']"
+        cubeInJson = self.toJson()
 
-        backSide = 'Back side:\n'
-        backSide += f"['{self.tiles[20].thirdColor}', '{self.tiles[19].firstColor}', '" \
-                     f"{self.tiles[18].thirdColor}'],\n['{self.tiles[23].secondColor}', " \
-                     f"'{self.tiles[22].color}', '{self.tiles[21].secondColor}'],\n['" \
-                     f"{self.tiles[26].thirdColor}', '{self.tiles[25].firstColor}', '" \
-                     f"{self.tiles[24].thirdColor}']"
+        frontSide = f'Front side:\n{str(cubeInJson.get("front"))[1:-1]}'
+        upSide = f'Up side:\n{str(cubeInJson.get("up"))[1:-1]}'
+        leftSide = f'Left side:\n{str(cubeInJson.get("left"))[1:-1]}'
+        rightSide = f'Right side:\n{str(cubeInJson.get("right"))[1:-1]}'
+        bottomSide = f'Bottom side:\n{str(cubeInJson.get("bottom"))[1:-1]}'
+        backSide = f'Back side:\n{str(cubeInJson.get("back"))[1:-1]}'
 
-        upSide = 'Up side:\n'
-        upSide += f"['{self.tiles[18].firstColor}', '{self.tiles[19].secondColor}', '" \
-                     f"{self.tiles[20].firstColor}'],\n['{self.tiles[9].firstColor}', " \
-                     f"'{self.tiles[10].color}', '{self.tiles[11].firstColor}'],\n['" \
-                     f"{self.tiles[0].firstColor}', '{self.tiles[1].secondColor}', '" \
-                     f"{self.tiles[2].firstColor}']"
-
-        bottomSide = 'Bottom side:\n'
-        bottomSide += f"['{self.tiles[6].firstColor}', '{self.tiles[7].secondColor}', '" \
-                  f"{self.tiles[8].firstColor}'],\n['{self.tiles[15].firstColor}', " \
-                  f"'{self.tiles[16].color}', '{self.tiles[17].firstColor}'],\n['" \
-                  f"{self.tiles[24].firstColor}', '{self.tiles[25].secondColor}', '" \
-                  f"{self.tiles[26].firstColor}']"
-
-        leftSide = 'Left side:\n'
-        leftSide += f"['{self.tiles[18].secondColor}', '{self.tiles[9].secondColor}', '" \
-                     f"{self.tiles[0].secondColor}'],\n['{self.tiles[21].firstColor}', " \
-                     f"'{self.tiles[12].color}', '{self.tiles[3].firstColor}'],\n['" \
-                     f"{self.tiles[24].secondColor}', '{self.tiles[15].secondColor}', '" \
-                     f"{self.tiles[6].secondColor}']"
-
-        rightSide = 'Right side:\n'
-        rightSide += f"['{self.tiles[2].secondColor}', '{self.tiles[11].secondColor}', '" \
-                    f"{self.tiles[20].secondColor}'],\n['{self.tiles[5].firstColor}', " \
-                    f"'{self.tiles[14].color}', '{self.tiles[23].firstColor}'],\n['" \
-                    f"{self.tiles[8].secondColor}', '{self.tiles[17].secondColor}', '" \
-                    f"{self.tiles[26].secondColor}']"
-
-        return "\n".join([frontSide, upSide, leftSide, rightSide, bottomSide, backSide])
+        return "\n".join([frontSide, upSide, leftSide, rightSide, bottomSide, backSide]).replace('], ', '],\n')
 
 
     def __init__(self, tiles: list = (), path: str = ''):
@@ -96,33 +63,33 @@ class Cube:
             leftArrays = data.get('left')
 
         self.tiles = [
-            cornerTile(upArrays[2][0], leftArrays[0][2], frontArrays[0][0]),
-            borderTile(frontArrays[0][1], upArrays[2][1]),
-            cornerTile(upArrays[2][2], rightArrays[0][0], frontArrays[0][2]),
-            borderTile(leftArrays[1][2], frontArrays[1][0]),
-            middleTile(frontArrays[1][1]),
-            borderTile(rightArrays[1][0], frontArrays[1][2]),
-            cornerTile(bottomArrays[0][0], leftArrays[2][2], frontArrays[2][0]),
-            borderTile(frontArrays[2][1], bottomArrays[0][1]),
-            cornerTile(bottomArrays[0][2], rightArrays[2][0], frontArrays[2][2]),
-            borderTile(upArrays[1][0], leftArrays[0][1]),
-            middleTile(upArrays[1][1]),
-            borderTile(upArrays[1][2], rightArrays[0][1]),
-            middleTile(leftArrays[1][1]),
+            CornerTile(upArrays[2][0], leftArrays[0][2], frontArrays[0][0]),
+            BorderTile(frontArrays[0][1], upArrays[2][1]),
+            CornerTile(upArrays[2][2], rightArrays[0][0], frontArrays[0][2]),
+            BorderTile(leftArrays[1][2], frontArrays[1][0]),
+            MiddleTile(frontArrays[1][1]),
+            BorderTile(rightArrays[1][0], frontArrays[1][2]),
+            CornerTile(bottomArrays[0][0], leftArrays[2][2], frontArrays[2][0]),
+            BorderTile(frontArrays[2][1], bottomArrays[0][1]),
+            CornerTile(bottomArrays[0][2], rightArrays[2][0], frontArrays[2][2]),
+            BorderTile(upArrays[1][0], leftArrays[0][1]),
+            MiddleTile(upArrays[1][1]),
+            BorderTile(upArrays[1][2], rightArrays[0][1]),
+            MiddleTile(leftArrays[1][1]),
             None,
-            middleTile(rightArrays[1][1]),
-            borderTile(bottomArrays[1][0], leftArrays[2][1]),
-            middleTile(bottomArrays[1][1]),
-            borderTile(bottomArrays[1][2], rightArrays[2][1]),
-            cornerTile(upArrays[0][0], leftArrays[0][0], backArrays[0][2]),
-            borderTile(backArrays[0][1], upArrays[0][1]),
-            cornerTile(upArrays[0][2], rightArrays[0][2], backArrays[0][0]),
-            borderTile(leftArrays[1][0], backArrays[1][2]),
-            middleTile(backArrays[1][1]),
-            borderTile(rightArrays[1][2], backArrays[1][0]),
-            cornerTile(bottomArrays[2][0], leftArrays[2][0], backArrays[2][2]),
-            borderTile(backArrays[2][1], bottomArrays[2][1]),
-            cornerTile(bottomArrays[2][2], rightArrays[2][2], backArrays[2][0])
+            MiddleTile(rightArrays[1][1]),
+            BorderTile(bottomArrays[1][0], leftArrays[2][1]),
+            MiddleTile(bottomArrays[1][1]),
+            BorderTile(bottomArrays[1][2], rightArrays[2][1]),
+            CornerTile(upArrays[0][0], leftArrays[0][0], backArrays[0][2]),
+            BorderTile(backArrays[0][1], upArrays[0][1]),
+            CornerTile(upArrays[0][2], rightArrays[0][2], backArrays[0][0]),
+            BorderTile(leftArrays[1][0], backArrays[1][2]),
+            MiddleTile(backArrays[1][1]),
+            BorderTile(rightArrays[1][2], backArrays[1][0]),
+            CornerTile(bottomArrays[2][0], leftArrays[2][0], backArrays[2][2]),
+            BorderTile(backArrays[2][1], bottomArrays[2][1]),
+            CornerTile(bottomArrays[2][2], rightArrays[2][2], backArrays[2][0])
         , ]
 
     def toJson(self):
@@ -175,7 +142,7 @@ class Cube:
         return cube
 
     def setAllNormal(self):
-        self.fromJson('../basicJsons/normalSet.json')
+        self.fromJson('../jsonFiles/baseCase.json')
 
 
     def rotation(self, rotationType: str):
@@ -199,3 +166,20 @@ class Cube:
 
             for i in cornerNumbers[:4]:
                 self.tiles[i].flip(cornerRotations)
+
+    def checkFront(self, colors: list):
+        checkinglist = [self.tiles[0].thirdColor,
+        self.tiles[1].firstColor,
+        self.tiles[2].thirdColor,
+        self.tiles[3].secondColor,
+        self.tiles[4].color,
+        self.tiles[5].secondColor,
+        self.tiles[6].thirdColor,
+        self.tiles[7].firstColor,
+        self.tiles[8].thirdColor]
+
+        if checkinglist is colors:
+            return True
+        return False
+
+

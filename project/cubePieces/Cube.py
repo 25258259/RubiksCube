@@ -1,6 +1,5 @@
 import json
 
-
 from project.cubePieces.Tiles import MiddleTile, BorderTile, CornerTile
 
 
@@ -9,8 +8,8 @@ class Cube:
     rotations = {
         'F': [[0, 2, 6, 8, 6, 0, 8, 2], [1, 3, 5, 7, 3, 7, 1, 5],'1'],
         "F'": [[0, 2, 6, 8, 2, 8, 0, 6], [1, 3, 5, 7, 5, 1, 7, 3], '1'],
-        "U": [[0, 2, 18, 20, 2, 20, 0, 18], [1, 9, 11, 19, 9, 19, 1, 9], '2'],
-        "U'": [[0, 2, 18, 20, 18, 0, 20, 2], [1, 9, 11, 19, 9, 19, 1, 9], '2'],
+        "U": [[0, 2, 18, 20, 2, 20, 0, 18], [1, 9, 11, 19, 11, 1, 19, 9], '2'],
+        "U'": [[0, 2, 18, 20, 18, 0, 20, 2], [1, 9, 11, 19, 11, 19, 1, 9], '2'],
         "D": [[6, 8, 24, 26, 24, 6, 26, 8], [7, 15, 17, 25, 15, 25, 7, 17], '2'],
         "D'": [[6, 8, 24, 26, 8, 26, 6, 24], [7, 15, 17, 25, 17, 7, 25, 15], '2'],
         "R": [[2, 8, 20, 26, 8, 26, 2, 20], [5, 11, 17, 23, 17, 5, 23, 11], '3'],
@@ -26,6 +25,19 @@ class Cube:
         "S": [[9, 11, 15, 17, 15, 9, 17, 11], [10, 12, 14, 16, 12, 16, 10, 14], []],
         "S'": [[9, 11, 15, 17, 11, 17, 9, 15], [10, 12, 14, 16, 14, 10, 16, 12], []],
     }
+
+    rotateMoreThanOne = {
+        "u": ["U", "E'"],
+        "d": ["D", "E"],
+        "r": ["R", "M''"],
+        "l": ["L", "M"],
+        "f": ["F", "S"],
+        "b": ["B", "S'"],
+        "x": ["L'", "M'", "R"],
+        "y": ["U", "E'", "D'"],
+        "z": ["F", "S", "B'"]
+    }
+
 
     def __str__(self):
         cubeInJson = self.toJson()
@@ -141,13 +153,24 @@ class Cube:
 
         return cube
 
+
     def setAllNormal(self):
         self.fromJson('../jsonFiles/baseCase.json')
 
 
     def rotation(self, rotationType: str):
         """Rotation type from Cube.rotations"""
-        cornerNumbers, borderNumbers, cornerRotations = Cube.rotations.get(rotationType)
+        cornerNumbers, borderNumbers, cornerRotations = Cube.rotations.get(rotationType.upper())
+
+        if len(cornerRotations) == 0:
+            for i in cornerNumbers[:4]:
+                self.tiles[i].flip()
+        else:
+            for i in borderNumbers[:4]:
+                self.tiles[i].flip()
+            for i in cornerNumbers[:4]:
+                self.tiles[i].flip(cornerRotations)
+
 
         self.tiles[cornerNumbers[0]], self.tiles[cornerNumbers[1]], self.tiles[cornerNumbers[2]], \
         self.tiles[cornerNumbers[3]] = self.tiles[cornerNumbers[4]], self.tiles[cornerNumbers[5]], \
@@ -157,15 +180,22 @@ class Cube:
         self.tiles[borderNumbers[3]] = self.tiles[borderNumbers[4]], self.tiles[borderNumbers[5]], \
                                        self.tiles[borderNumbers[6]], self.tiles[borderNumbers[7]]
 
-        if len(cornerRotations) == 0:
-            for i in cornerRotations[:4]:
-                self.tiles[i].flip()
-        else:
-            for i in borderNumbers[:4]:
-                self.tiles[i].flip()
 
-            for i in cornerNumbers[:4]:
-                self.tiles[i].flip(cornerRotations)
+                #działa
+
+
+    def moreThenOneSideRotation(self, rotationType):
+        rotations = self.rotateMoreThanOne.get(rotationType[0])
+        if rotationType[-1] == "'":
+            for index, rotation in enumerate(rotations):
+                if rotation[-1] == "'":
+                    rotations[index] = rotation[0]
+                else:
+                    rotations[index] = rotation + "'"
+
+        for rotation in rotations:
+            self.rotation(rotation)
+
 
     def checkFront(self, colors: list):
         checkinglist = [self.tiles[0].thirdColor,

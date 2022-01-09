@@ -1,32 +1,100 @@
 {
-  "front": [
-    ["red", "red", "red"],
-    ["red", "red", "red"],
-    ["red", "red", "red"]
-  ],
-  "up": [
-    ["yellow", "yellow", "yellow"],
-    ["yellow", "yellow", "yellow"],
-    ["yellow", "yellow", "yellow"]
-  ],
-  "left": [
-    ["blue", "blue", "blue"],
-    ["blue", "blue", "blue"],
-    ["blue", "blue", "blue"]
-  ],
-  "right": [
-    ["green", "green", "green"],
-    ["green", "green", "green"],
-    ["green", "green", "green"]
-  ],
-  "bottom": [
-    ["white", "white", "white"],
-    ["white", "white", "white"],
-    ["white", "white", "white"]
-  ],
-  "back": [
-    ["orange", "orange", "orange"],
-    ["orange", "orange", "orange"],
-    ["orange", "orange", "orange"]
-  ]
+  "perfectCross": {
+    "front": [
+      [0, 1, 0],
+      [1, 1, 1],
+      [0, 1, 0]
+    ],
+    "left": [
+      [0, 0, 0],
+      [0, 1, 1],
+      [0, 0, 0]
+    ],
+    "right": [
+      [0, 0, 0],
+      [1, 1, 0],
+      [0, 0, 0]
+    ],
+    "bottom": [
+      [0, 1, 0],
+      [0, 1, 0],
+      [0, 0, 0]
+    ],
+    "up": [
+      [0, 0, 0],
+      [0, 1, 0],
+      [0, 1, 0]
+    ]
+  },
+  "onlyCross": {
+    "front": [
+      [0, 1, 0],
+      [1, 1, 1],
+      [0, 1, 0]
+    ]
+  },
+  "tToCross": {
+    "front1": [
+      [0, 0, 0],
+      [1, 1, 1],
+      [0, 1, 0]
+    ],
+    "front2": [
+      [0, 1, 0],
+      [0, 1, 1],
+      [0, 1, 0]
+    ],
+    "front3": [
+      [0, 1, 0],
+      [1, 1, 1],
+      [0, 0, 0]
+    ],
+    "front4": [
+      [0, 1, 0],
+      [1, 1, 0],
+      [0, 1, 0]
+    ]
+  },
+  "lToCross": {
+    "front1": [
+      [0, 1, 0],
+      [1, 1, 0],
+      [0, 0, 0]
+    ],
+    "front2": [
+      [0, 0, 0],
+      [1, 1, 0],
+      [0, 1, 0]
+    ],
+    "front3": [
+      [0, 0, 0],
+      [0, 1, 1],
+      [0, 1, 0]
+    ],
+    "front4": [
+      [0, 1, 0],
+      [0, 1, 1],
+      [0, 0, 0]
+    ]
+  },
+  "iToCross": {
+    "front1": [
+      [0, 1, 0],
+      [0, 1, 0],
+      [0, 1, 0]
+    ],
+    "front2": [
+      [0, 0, 0],
+      [1, 1, 1],
+      [0, 0, 0]
+    ]
+  },
+  "pointToCross":
+  {
+    "front1": [
+      [0, 0, 0],
+      [0, 1, 0],
+      [0, 0, 0]
+    ]
+  }
 }

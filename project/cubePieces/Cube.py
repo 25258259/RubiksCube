@@ -7,10 +7,10 @@ from project.cubePieces.Tiles import middleTile, borderTile, cornerTile
 class Cube:
     # Blocks numbers are front left to right, up to bottom, front to back
     rotations = {
-        'F': [[0, 2, 6, 8, 6, 0, 8, 2], [1, 3, 5, 7, 3, 7, 1, 5],'1'],
+        'F': [[0, 2, 6, 8, 6, 0, 8, 2], [1, 3, 5, 7, 3, 7, 1, 5], '1'],
         "F'": [[0, 2, 6, 8, 2, 8, 0, 6], [1, 3, 5, 7, 5, 1, 7, 3], '1'],
-        "U": [[0, 2, 18, 20, 2, 20, 0, 18], [1, 9, 11, 19, 9, 19, 1, 9], '2'],
-        "U'": [[0, 2, 18, 20, 18, 0, 20, 2], [1, 9, 11, 19, 9, 19, 1, 9], '2'],
+        "U": [[0, 2, 18, 20, 2, 20, 0, 18], [1, 9, 11, 19, 11, 1, 19, 9], '2'],
+        "U'": [[0, 2, 18, 20, 18, 0, 20, 2], [1, 9, 11, 19, 11, 19, 1, 9], '2'],
         "D": [[6, 8, 24, 26, 24, 6, 26, 8], [7, 15, 17, 25, 15, 25, 7, 17], '2'],
         "D'": [[6, 8, 24, 26, 8, 26, 6, 24], [7, 15, 17, 25, 17, 7, 25, 15], '2'],
         "R": [[2, 8, 20, 26, 8, 26, 2, 20], [5, 11, 17, 23, 17, 5, 23, 11], '3'],
@@ -175,7 +175,7 @@ class Cube:
         return cube
 
     def setDefault(self):
-        self.fromJson('project/basicJsons/normalSet.json')
+        self.fromJson('../basicJsons/normalSet.json')
 
 
     def rotation(self, rotationType: str):

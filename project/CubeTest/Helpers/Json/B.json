@@ -1,23 +1,23 @@
 {
   "front": [
-    ["red", "orange", "red"],
+    ["red", "red", "red"],
     ["red", "red", ",red"],
     ["red", "red", "red"]
   ],
   "back": [
     ["orange", "orange", "orange"],
-    ["orange", "orange", "yellow"],
-    ["orange", "blue", "orange"]
+    ["orange", "orange", "orange"],
+    ["orange", "orange", "orange"]
   ],
   "right": [
-    ["green", "blue", "white"],
     ["green", "green", "white"],
-    ["green", "green", "yellow"]
+    ["green", "green", "white"],
+    ["green", "green", "white"]
   ],
   "left": [
     ["yellow", "blue", "blue"],
-    ["orange", "blue", "blue"],
-    ["white", "orange", "blue"]
+    ["yellow", "blue", "blue"],
+    ["yellow", "blue", "blue"]
   ],
   "up": [
     ["green", "green", "green"],
@@ -26,7 +26,7 @@
   ],
   "bottom": [
     ["white", "white", "white"],
-    ["blue", "white", "white"],
-    ["blue", "white", "blue"]
+    ["white", "white", "white"],
+    ["blue", "blue", "blue"]
   ]
 }

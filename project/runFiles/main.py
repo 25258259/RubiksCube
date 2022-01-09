@@ -9,17 +9,17 @@ if __name__ == '__main__':
                       cornerTile('white', 'blue', 'red'), borderTile('red', 'white'),
                       cornerTile('white', 'green', 'red'),
                       borderTile('yellow', 'blue'), middleTile('yellow'),
-                      borderTile('yellow','green'), middleTile('blue'),
+                      borderTile('yellow', 'green'), middleTile('blue'),
                       None, middleTile('green'), borderTile('white', 'blue'), middleTile('white'),
                       borderTile('white', 'green'),
                       cornerTile('yellow', 'blue', 'orange'), borderTile('orange', 'yellow'),
                       cornerTile('yellow', 'green', 'orange'), borderTile('blue', 'orange'),
                       middleTile('orange'), borderTile('green', 'orange'),
                       cornerTile('white', 'blue', 'orange'), borderTile('orange', 'white'),
-                      cornerTile('white', 'green', 'orange')
-                    ,])
+                      cornerTile('white', 'green', 'orange'),
+                      ])
 
     cube2 = Cube.Cube()
 
-    cube2.oneSideRotation('F')
+    cube2.rotation('F')
     print(cube2)

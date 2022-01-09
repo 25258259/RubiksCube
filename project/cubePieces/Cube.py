@@ -1,6 +1,8 @@
 import json
 
+
 from project.cubePieces.Tiles import middleTile, borderTile, cornerTile
+
 
 class Cube:
     # Blocks numbers are front left to right, up to bottom, front to back
@@ -82,8 +84,9 @@ class Cube:
 
 
     def fromJson(self, jsonFile: str):
+        """Takes path to json file and makes cube from it"""
         with open(f"{jsonFile}", 'r') as file:
-            data = json.load(file).get('cube')
+            data = json.load(file)
 
             frontArrays = data.get('front')
             backArrays = data.get('back')
@@ -122,6 +125,54 @@ class Cube:
             cornerTile(bottomArrays[2][2], rightArrays[2][2], backArrays[2][0])
         , ]
 
+    def toJson(self):
+        """Returns object with each side colors"""
+        frontSide = [[f"{self.tiles[0].thirdColor}", f"{self.tiles[1].firstColor}",
+                     f"{self.tiles[2].thirdColor}"],[f"{self.tiles[3].secondColor}",
+                     f"{self.tiles[4].color}", f"{self.tiles[5].secondColor}"],
+                    [f"{self.tiles[6].thirdColor}", f"{self.tiles[7].firstColor}",
+                     f"{self.tiles[8].thirdColor}"]]
+        
+        backSide = [[f"{self.tiles[20].thirdColor}", f"{self.tiles[19].firstColor}",
+                    f"{self.tiles[18].thirdColor}"], [f"{self.tiles[23].secondColor}",
+                    f"{self.tiles[22].color}", f"{self.tiles[21].secondColor}"],
+                    [f"{self.tiles[26].thirdColor}", f"{self.tiles[25].firstColor}",
+                    f"{self.tiles[24].thirdColor}"]]
+
+        upSide = [[f"{self.tiles[18].firstColor}", f"{self.tiles[19].secondColor}",
+                  f"{self.tiles[20].firstColor}"],[f"{self.tiles[9].firstColor}",
+                  f"{self.tiles[10].color}", f"{self.tiles[11].firstColor}"],
+                  [f"{self.tiles[0].firstColor}", f"{self.tiles[1].secondColor}",
+                  f"{self.tiles[2].firstColor}"]]
+
+        bottomSide = [[f"{self.tiles[6].firstColor}", f"{self.tiles[7].secondColor}",
+                      f"{self.tiles[8].firstColor}"],[f"{self.tiles[15].firstColor}",
+                      f"{self.tiles[16].color}", f"{self.tiles[17].firstColor}"],
+                      [f"{self.tiles[24].firstColor}", f"{self.tiles[25].secondColor}",
+                      f"{self.tiles[26].firstColor}"]]
+
+        leftSide = [[f"{self.tiles[18].secondColor}", f"{self.tiles[9].secondColor}",
+                    f"{self.tiles[0].secondColor}"], [f"{self.tiles[21].firstColor}",
+                    f"{self.tiles[12].color}", f"{self.tiles[3].firstColor}"],
+                    [f"{self.tiles[24].secondColor}", f"{self.tiles[15].secondColor}",
+                    f"{self.tiles[6].secondColor}"]]
+
+        rightSide = [[f"{self.tiles[2].secondColor}", f"{self.tiles[11].secondColor}",
+                     f"{self.tiles[20].secondColor}"],[f"{self.tiles[5].firstColor}",
+                     f"{self.tiles[14].color}", f"{self.tiles[23].firstColor}"],
+                     [f"{self.tiles[8].secondColor}", f"{self.tiles[17].secondColor}",
+                     f"{self.tiles[26].secondColor}"]]
+
+        cube = {
+            "front": frontSide,
+            "back": backSide,
+            "right": rightSide,
+            "left": leftSide,
+            "up": upSide,
+            "bottom": bottomSide
+        }
+
+        return cube
 
     def setAllNormal(self):
         self.fromJson('../basicJsons/normalSet.json')

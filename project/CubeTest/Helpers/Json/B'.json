@@ -1,0 +1,32 @@
+{
+  "front": [
+    ["red", "red", "red"],
+    ["red", "red", "red"],
+    ["red", "red", "red"]
+  ],
+  "back": [
+    ["orange", "orange", "orange"],
+    ["orange", "orange", "orange"],
+    ["orange", "orange", "orange"]
+  ],
+  "right": [
+    ["green", "green", "yellow"],
+    ["green", "green", "yellow"],
+    ["green", "green", "yellow"]
+  ],
+  "left": [
+    ["white", "blue", "blue"],
+    ["white", "blue", "blue"],
+    ["white", "blue", "blue"]
+  ],
+  "up": [
+    ["blue", "blue", "blue"],
+    ["yellow", "yellow", "yellow"],
+    ["yellow", "yellow", "yellow"]
+  ],
+  "bottom": [
+    ["white", "white", "white"],
+    ["white", "white", "white"],
+    ["green", "green", "green"]
+  ]
+}

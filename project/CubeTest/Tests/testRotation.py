@@ -6,7 +6,7 @@ from project.cubePieces import Cube
 class TestRotation(unittest.TestCase):
 
     def setUp(self):
-        self.cube = Cube.Cube(path =  'project/basicJsons/normalSet.json')
+        self.cube = Cube.Cube(path='project/jsonFiles/baseCase.json')
 
     def test_B_Rotation(self):
         with open('project/CubeTest/Helpers/Json/B.json') as data:
@@ -171,4 +171,4 @@ class TestRotation(unittest.TestCase):
         self.assertEqual(currentRotation,  correctRotation, 'Wrong Rotation')
 
     def tearDown(self):
-        self.cube.fromJson('project/basicJsons/normalSet.json')
+        self.cube.fromJson('project/jsonFiles/baseCase.json')

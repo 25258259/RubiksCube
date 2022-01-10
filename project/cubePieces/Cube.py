@@ -175,7 +175,7 @@ class Cube:
         return cube
 
     def setDefault(self):
-        self.fromJson('../basicJsons/normalSet.json')
+        self.fromJson('project/basicJsons/normalSet.json')
 
 
     def rotation(self, rotationType: str):

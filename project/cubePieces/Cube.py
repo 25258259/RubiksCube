@@ -174,6 +174,7 @@ class Cube:
 
         return cube
 
+
     def setDefault(self):
         self.fromJson('project/basicJsons/normalSet.json')
 

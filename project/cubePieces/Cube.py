@@ -125,6 +125,7 @@ class Cube:
             cornerTile(bottomArrays[2][2], rightArrays[2][2], backArrays[2][0])
         , ]
 
+
     def toJson(self):
         """Returns object with each side colors"""
         frontSide = [[f"{self.tiles[0].thirdColor}", f"{self.tiles[1].firstColor}",

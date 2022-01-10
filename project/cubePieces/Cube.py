@@ -181,9 +181,6 @@ class Cube:
                                        self.tiles[borderNumbers[6]], self.tiles[borderNumbers[7]]
 
 
-                #działa
-
-
     def moreThenOneSideRotation(self, rotationType):
         rotations = self.rotateMoreThanOne.get(rotationType[0])
         if rotationType[-1] == "'":
@@ -196,20 +193,145 @@ class Cube:
         for rotation in rotations:
             self.rotation(rotation)
 
+    def toColor(self, side: str):
+        if side == 'front':
+            return self.frontToColor()
+        elif side == 'back':
+            return self.backToColor()
+        elif side == 'right':
+            return self.rightToColor()
+        elif side == 'left':
+            return self.leftToColor()
+        elif side == 'bottom':
+            return self.bottomToColor()
+        return self.upToColor()
 
-    def checkFront(self, colors: list):
-        checkinglist = [self.tiles[0].thirdColor,
-        self.tiles[1].firstColor,
-        self.tiles[2].thirdColor,
-        self.tiles[3].secondColor,
-        self.tiles[4].color,
-        self.tiles[5].secondColor,
-        self.tiles[6].thirdColor,
-        self.tiles[7].firstColor,
-        self.tiles[8].thirdColor]
+    def frontToColor(self):
+        colors = [
+            self.tiles[0].thirdColor,
+            self.tiles[1].firstColor,
+            self.tiles[2].thirdColor,
+            self.tiles[3].secondColor,
+            self.tiles[4].color,
+            self.tiles[5].secondColor,
+            self.tiles[6].thirdColor,
+            self.tiles[7].firstColor,
+            self.tiles[8].thirdColor
+        ]
 
-        if checkinglist is colors:
-            return True
-        return False
+        return colors
 
+
+    def backToColor(self):
+        colors = [
+            self.tiles[20].thirdColor,
+            self.tiles[19].firstColor,
+            self.tiles[18].thirdColor,
+            self.tiles[23].secondColor,
+            self.tiles[22].color,
+            self.tiles[21].secondColor,
+            self.tiles[26].thirdColor,
+            self.tiles[25].firstColor,
+            self.tiles[24].thirdColor
+        ]
+
+        return colors
+
+
+    def upToColor(self):
+        colors = [
+            self.tiles[18].firstColor,
+            self.tiles[19].secondColor,
+            self.tiles[20].firstColor,
+            self.tiles[9].firstColor,
+            self.tiles[10].color,
+            self.tiles[11].firstColor,
+            self.tiles[0].firstColor,
+            self.tiles[1].secondColor,
+            self.tiles[2].firstColor
+        ]
+
+        return colors
+
+
+    def bottomToColor(self):
+        colors = [
+            self.tiles[6].firstColor,
+            self.tiles[7].secondColor,
+            self.tiles[8].firstColor,
+            self.tiles[15].firstColor,
+            self.tiles[16].color,
+            self.tiles[17].firstColor,
+            self.tiles[24].firstColor,
+            self.tiles[25].secondColor,
+            self.tiles[26].firstColor
+        ]
+
+        return colors
+
+
+    def leftToColor(self):
+        colors = [
+            self.tiles[18].secondColor,
+            self.tiles[9].secondColor,
+            self.tiles[0].secondColor,
+            self.tiles[21].firstColor,
+            self.tiles[12].color,
+            self.tiles[3].firstColor,
+            self.tiles[24].secondColor,
+            self.tiles[15].secondColor,
+            self.tiles[6].secondColor
+        ]
+
+        return colors
+
+
+    def rightToColor(self):
+        colors = [
+            self.tiles[2].secondColor,
+            self.tiles[11].secondColor,
+            self.tiles[20].secondColor,
+            self.tiles[5].firstColor,
+            self.tiles[14].color,
+            self.tiles[23].firstColor,
+            self.tiles[8].secondColor,
+            self.tiles[17].secondColor,
+            self.tiles[26].secondColor
+        ]
+
+        return colors
+
+
+    def checkSideColors(self, sideColors: list, combination: list):
+        color = sideColors[combination[0]]
+
+        for index in combination[1:]:
+            if sideColors[index] != color:
+                return False
+        return True
+        #TODO: maybe change output to combination and empty string
+
+    def searchForWhiteCross(self):
+        #front, up, right, left, bottom, back
+        sides = {
+            "front": '',
+            "up": '',
+            "right": '',
+            "left": '',
+            "bottom": '',
+            "back": ''
+        }
+        with open('../jsonFiles/startingPosition.json', 'r') as combinationFile:
+            combinations = json.load(combinationFile)
+
+        for key in sides:
+            for com in combinations:
+                if self.checkSideColors(self.toColor(key), com):
+                    if com.points > sides[key]:
+                        sides[key] = com.points
+
+        value = max(sides.values())
+        for key in sides:
+            if sides.get(key) == value:
+                return sides
 

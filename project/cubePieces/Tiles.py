@@ -1,4 +1,4 @@
-class middleTile:
+class MiddleTile:
     def __init__(self, color: str = 'red'):
         """Input is color in str"""
         self.color = color
@@ -7,7 +7,7 @@ class middleTile:
         pass
 
 
-class borderTile:
+class BorderTile:
     def __init__(self, firstColor: str = 'red', secondColor: str = 'green'):
         """Order is left/right, front/back and up/bottom, left/right and front/back, up/bottom"""
         self.firstColor = firstColor
@@ -17,7 +17,7 @@ class borderTile:
         self.firstColor, self.secondColor = self.secondColor, self.firstColor
 
 
-class cornerTile:
+class CornerTile:
     def __init__(self, firstColor: str = 'red', secondColor: str = 'green', thirdColor: str =
     'blue'):
         """Order is up/bottom, left/right, front/back"""

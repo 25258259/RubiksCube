@@ -182,15 +182,6 @@ class Cube:
                 self.tiles[i].flip(cornerRotations)
 
 
-        self.tiles[cornerNumbers[0]], self.tiles[cornerNumbers[1]], self.tiles[cornerNumbers[2]], \
-        self.tiles[cornerNumbers[3]] = self.tiles[cornerNumbers[4]], self.tiles[cornerNumbers[5]], \
-                                       self.tiles[cornerNumbers[6]], self.tiles[cornerNumbers[7]]
-
-        self.tiles[borderNumbers[0]], self.tiles[borderNumbers[1]], self.tiles[borderNumbers[2]], \
-        self.tiles[borderNumbers[3]] = self.tiles[borderNumbers[4]], self.tiles[borderNumbers[5]], \
-                                       self.tiles[borderNumbers[6]], self.tiles[borderNumbers[7]]
-
-
     def moreThenOneSideRotation(self, rotationType):
         rotations = self.rotateMoreThanOne.get(rotationType[0])
         if rotationType[-1] == "'":
@@ -202,6 +193,7 @@ class Cube:
 
         for rotation in rotations:
             self.rotation(rotation)
+
 
     def toColor(self, side: str):
         if side == 'front':
@@ -215,6 +207,7 @@ class Cube:
         elif side == 'bottom':
             return self.bottomToColor()
         return self.upToColor()
+
 
     def frontToColor(self):
         colors = [
@@ -319,29 +312,3 @@ class Cube:
             if sideColors[index] != color:
                 return False
         return True
-        #TODO: maybe change output to combination and empty string
-
-    def searchForWhiteCross(self):
-        #front, up, right, left, bottom, back
-        sides = {
-            "front": '',
-            "up": '',
-            "right": '',
-            "left": '',
-            "bottom": '',
-            "back": ''
-        }
-        with open('../jsonFiles/startingPosition.json', 'r') as combinationFile:
-            combinations = json.load(combinationFile)
-
-        for key in sides:
-            for com in combinations:
-                if self.checkSideColors(self.toColor(key), com):
-                    if com.points > sides[key]:
-                        sides[key] = com.points
-
-        value = max(sides.values())
-        for key in sides:
-            if sides.get(key) == value:
-                return sides
-

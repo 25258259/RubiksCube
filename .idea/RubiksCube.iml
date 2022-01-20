@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv/PycharmProjects" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (Spac_Invaders)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (RubiksCube)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

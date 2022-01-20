@@ -2,9 +2,11 @@ from project.cubePieces.Cube import Cube
 
 
 class CubeSolver:
-    algorithms = {
-
-    }
+    '''
+    Class which is solving the cube using various algorithms
+    :cube: cube object you want to solve
+    '''
+    algorithms = {}
 
     solvedCube = Cube()
 
@@ -13,7 +15,12 @@ class CubeSolver:
         self.solvedCube = Cube
         self.combination = []
 
-    def choosingBestSide(self):
+    def choosingBestSide(self) -> str:
+        '''
+        Choosing the best side to start solving. It finds the easiest side to get starting cross
+        position
+        :return: color we want to start with
+        '''
         marks = {
             "white": [0, "side"],
             "red": [0, "side"],
@@ -43,7 +50,11 @@ class CubeSolver:
             if marks.get(color)[0] == maxLen:
                 return color
 
-    def setBestSide(self):
+    def setBestSide(self) -> None:
+        '''
+        Function that rotates depending on the color we want to start.
+        While rotating it's saving used rotations to self.combination
+        '''
         color = self.choosingBestSide()
         if color == self.cube.tiles[10].color:
             self.cube.moreThenOneSideRotation("x'")
@@ -80,7 +91,10 @@ class CubeSolver:
             upColor = self.cube.upToColor()[4]
             counter += 1
 
-    def findWhiteCross(self):
+    def findWhiteCross(self) -> None:
+        '''
+        Sets the cross in best color
+        '''
         # mark each side
         # choose the closest to the cross
         self.setBestSide()

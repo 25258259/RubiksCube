@@ -4,7 +4,12 @@ from project.cubePieces.Tiles import MiddleTile, BorderTile, CornerTile
 
 
 class Cube:
-    # Blocks numbers are front left to right, up to bottom, front to back
+    '''
+    Class representing the Cube itself.
+    Enter tiles, path or leave empty to create default Cube
+    :param tiles: list of tiles in cube
+    :param path: path to json file
+    '''
     rotations = {
         'F': [[0, 2, 6, 8, 6, 0, 8, 2], [1, 3, 5, 7, 3, 7, 1, 5], '1'],
         "F'": [[0, 2, 6, 8, 2, 8, 0, 6], [1, 3, 5, 7, 5, 1, 7, 3], '1'],
@@ -38,8 +43,10 @@ class Cube:
         "z": ["F", "S", "B'"]
     }
 
-
-    def __str__(self):
+    def __str__(self) -> str:
+        '''
+        :return: string with object representation
+        '''
         cubeInJson = self.toJson()
 
         frontSide = f'Front side:\n{str(cubeInJson.get("front"))[1:-1]}'
@@ -51,9 +58,7 @@ class Cube:
 
         return "\n".join([frontSide, upSide, leftSide, rightSide, bottomSide, backSide]).replace('], ', '],\n')
 
-
     def __init__(self, tiles: list = (), path: str = ''):
-        """Enter list of cubes"""
         if len(tiles) == 27:
             self.tiles = tiles
         elif len(path) != 0:
@@ -61,9 +66,11 @@ class Cube:
         else:
             self.setAllNormal()
 
-
-    def fromJson(self, jsonFile: str):
-        """Takes path to json file and makes cube from it"""
+    def fromJson(self, jsonFile: str) -> None:
+        '''
+        Function creating Cube from json file
+        :param jsonFile: path to json file
+        '''
         with open(f"{jsonFile}", 'r') as file:
             data = json.load(file)
 
@@ -102,11 +109,13 @@ class Cube:
             CornerTile(bottomArrays[2][0], leftArrays[2][0], backArrays[2][2]),
             BorderTile(backArrays[2][1], bottomArrays[2][1]),
             CornerTile(bottomArrays[2][2], rightArrays[2][2], backArrays[2][0])
-        , ]
+        ]
 
-
-    def toJson(self):
-        """Returns object with each side colors"""
+    def toJson(self) -> dict:
+        '''
+        Creates JSON representation of the cube
+        :return: dictionary with each side colors
+        '''
         frontSide = [[f"{self.tiles[0].thirdColor}", f"{self.tiles[1].firstColor}",
                      f"{self.tiles[2].thirdColor}"],[f"{self.tiles[3].secondColor}",
                      f"{self.tiles[4].color}", f"{self.tiles[5].secondColor}"],
@@ -154,13 +163,19 @@ class Cube:
 
         return cube
 
-
-    def setAllNormal(self):
+    def setAllNormal(self) -> None:
+        '''
+        Sets cube to it's default position
+        '''
         self.fromJson('../jsonFiles/baseCase.json')
 
-
-    def rotation(self, rotationType: str):
+    def rotation(self, rotationType: str) -> None:
+        '''
+        Rotates the cube
+        :param rotationType: rotation name that you want to perform
+        '''
         """Rotation type from Cube.rotations"""
+
         cornerNumbers, borderNumbers, cornerRotations = Cube.rotations.get(rotationType)
 
         self.tiles[cornerNumbers[0]], self.tiles[cornerNumbers[1]], self.tiles[cornerNumbers[2]], \
@@ -181,8 +196,11 @@ class Cube:
             for i in cornerNumbers[:4]:
                 self.tiles[i].flip(cornerRotations)
 
-
-    def moreThenOneSideRotation(self, rotationType):
+    def moreThenOneSideRotation(self, rotationType: str) -> None:
+        '''
+        Rotates more than one side of the cube
+        :param rotationType: rotation name that you want to perform
+        '''
         rotations = self.rotateMoreThanOne.get(rotationType[0])
         if rotationType[-1] == "'":
             for index, rotation in enumerate(rotations):
@@ -194,8 +212,12 @@ class Cube:
         for rotation in rotations:
             self.rotation(rotation)
 
-
-    def toColor(self, side: str):
+    def toColor(self, side: str) -> list:
+        '''
+        Function to get chosen side color
+        :param side: side's name colors you want
+        :return: list of tiles' colors
+        '''
         if side == 'front':
             return self.frontToColor()
         elif side == 'back':
@@ -208,8 +230,11 @@ class Cube:
             return self.bottomToColor()
         return self.upToColor()
 
-
-    def frontToColor(self):
+    def frontToColor(self) -> list:
+        '''
+        Gets the front side colors
+        :return: list of front side colors
+        '''
         colors = [
             self.tiles[0].thirdColor,
             self.tiles[1].firstColor,
@@ -224,8 +249,11 @@ class Cube:
 
         return colors
 
-
-    def backToColor(self):
+    def backToColor(self) -> list:
+        '''
+        Gets the back side colors
+        :return: list of back side colors
+        '''
         colors = [
             self.tiles[20].thirdColor,
             self.tiles[19].firstColor,
@@ -240,8 +268,11 @@ class Cube:
 
         return colors
 
-
-    def upToColor(self):
+    def upToColor(self) -> list:
+        '''
+        Gets the up side colors
+        :return: list of up side colors
+        '''
         colors = [
             self.tiles[18].firstColor,
             self.tiles[19].secondColor,
@@ -256,8 +287,11 @@ class Cube:
 
         return colors
 
-
-    def bottomToColor(self):
+    def bottomToColor(self) -> list:
+        '''
+        Gets the bottom side colors
+        :return: list of bottom side colors
+        '''
         colors = [
             self.tiles[6].firstColor,
             self.tiles[7].secondColor,
@@ -272,8 +306,11 @@ class Cube:
 
         return colors
 
-
-    def leftToColor(self):
+    def leftToColor(self) -> list:
+        '''
+        Gets the left side colors
+        :return: list of left side colors
+        '''
         colors = [
             self.tiles[18].secondColor,
             self.tiles[9].secondColor,
@@ -288,8 +325,11 @@ class Cube:
 
         return colors
 
-
-    def rightToColor(self):
+    def rightToColor(self) -> list:
+        '''
+        Gets the right side colors
+        :return: list of right side colors
+        '''
         colors = [
             self.tiles[2].secondColor,
             self.tiles[11].secondColor,
@@ -304,8 +344,13 @@ class Cube:
 
         return colors
 
-
-    def checkSideColors(self, sideColors: list, combination: list):
+    def checkSideColors(self, sideColors: list, combination: list) -> bool:
+        '''
+        Checks if the entered lists of colors are matching
+        :param sideColors: list of the chosen side colors
+        :param combination: list of numbers of blocks that will be checked
+        :return: if blocks in combination are the same color
+        '''
         color = sideColors[combination[0]]
 
         for index in combination[1:]:

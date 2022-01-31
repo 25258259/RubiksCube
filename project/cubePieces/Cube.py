@@ -34,7 +34,7 @@ class Cube:
     rotateMoreThanOne = {
         "u": ["U", "E'"],
         "d": ["D", "E"],
-        "r": ["R", "M''"],
+        "r": ["R", "M'"],
         "l": ["L", "M"],
         "f": ["F", "S"],
         "b": ["B", "S'"],

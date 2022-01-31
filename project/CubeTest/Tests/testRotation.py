@@ -170,5 +170,98 @@ class TestRotation(unittest.TestCase):
 
         self.assertEqual(currentRotation,  correctRotation, 'Wrong Rotation')
 
+    def test_u_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/small_u.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("U")
+        self.cube.rotation("E'")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_d_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/small_d.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("D")
+        self.cube.rotation("E")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_r_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/small_r.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("R")
+        self.cube.rotation("M'")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_l_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/small_l.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("L")
+        self.cube.rotation("M")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_f_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/small_f.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("F")
+        self.cube.rotation("S")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_b_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/small_b.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("B")
+        self.cube.rotation("S'")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_X_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/X.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("L'")
+        self.cube.rotation("M'")
+        self.cube.rotation("R")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_Y_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/Y.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("U")
+        self.cube.rotation("E'")
+        self.cube.rotation("D'")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
+    def test_Z_Rotation(self):
+        with open("project/CubeTest/Helpers/Json/Z.json") as data:
+            correctRotation = json.load(data)
+
+        self.cube.rotation("F")
+        self.cube.rotation("S")
+        self.cube.rotation("B'")
+        currentRotation = self.cube.toJson()
+
+        self.assertEqual(currentRotation, correctRotation, 'Wrong Rotation')
+
     def tearDown(self):
         self.cube.fromJson('project/jsonFiles/baseCase.json')

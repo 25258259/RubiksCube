@@ -59,9 +59,8 @@ class Cube:
         return "\n".join([frontSide, upSide, leftSide, rightSide, bottomSide, backSide]).replace('], ', '],\n')
 
     def __init__(self, tiles: list = (), path: str = ''):
-        if len(tiles) == 27:
-            self.tiles = tiles
-        elif len(path) != 0:
+        self.tiles = tiles
+        if len(path) != 0:
             self.fromJson(path)
         else:
             self.setAllNormal()

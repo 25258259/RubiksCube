@@ -6,14 +6,12 @@ from project.cubeFixer.CubeSolver import CubeSolver
 
 
 if __name__ == '__main__':
-    Cube.Cube()
+    cube = Cube.Cube()
 
+    cube.rotation('R')
+    cube.rotation('L')
+    cube.moreThenOneSideRotation('u')
+    cube.rotation('R')
 
-    solve = CubeSolver(Cube.Cube())
-    solve.cube.rotation('F')
-    solve.cube.rotation('B')
-    solve.cube.rotation('U')
-
+    solve = CubeSolver(cube)
     solve.findWhiteCross()
-    print(solve.cube)
-    print(solve.combination)

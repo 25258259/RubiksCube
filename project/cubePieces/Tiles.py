@@ -1,3 +1,6 @@
+from .Cube import MiddleTile, CornerTile, BorderTile
+
+
 class MiddleTile:
     '''
     Representation of the one color tile in cube
@@ -12,7 +15,7 @@ class MiddleTile:
         '''
         pass
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: MiddleTile) -> bool:
         '''
         Function to check if this and other are same
         :param other: other middle tile
@@ -44,7 +47,7 @@ class BorderTile:
         '''
         self.firstColor, self.secondColor = self.secondColor, self.firstColor
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: BorderTile) -> bool:
         '''
         Function to check if this and other are same
         :param other: other border tile
@@ -78,7 +81,7 @@ class CornerTile:
         self.thirdColor = thirdColor
         """front/back"""
 
-    def flip(self, rotation) -> None:
+    def flip(self, rotation: str) -> None:
         '''
         Function to flip colors depending on the rotation
         :rotation: which rotation type you performed
@@ -92,7 +95,7 @@ class CornerTile:
         else:
             print('unknown rotation')
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: CornerTile) -> bool:
         '''
         Function to check if self and other are the same
         :param other: other corner tile
@@ -103,4 +106,16 @@ class CornerTile:
 
         if sorted(colors1) == sorted(colors2):
             return True
+        return False
+
+    def inRightPlace(self, other: CornerTile) -> bool:
+        '''
+        Checks if corner tile is in right position and right directions
+        :param other: corner tile in perfect position
+        :return: True or False if it is right or not
+        '''
+        if self.firstColor == other.firstColor:
+            if self.secondColor == other.secondColor:
+                if self.thirdColor == other.thirdColor:
+                    return True
         return False

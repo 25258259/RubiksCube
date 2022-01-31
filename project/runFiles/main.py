@@ -6,12 +6,11 @@ from project.cubeFixer.CubeSolver import CubeSolver
 
 
 if __name__ == '__main__':
-    cube = Cube.Cube()
+    cube =  Cube.Cube()
 
-    cube.rotation('R')
-    cube.rotation('L')
-    cube.moreThenOneSideRotation('u')
-    cube.rotation('R')
+    cube.rotation("B")
+    cube.rotation("S'")
 
-    solve = CubeSolver(cube)
-    solve.findWhiteCross()
+    with open('../CubeTest/Helpers/Json/small_b.json', 'w') as data:
+     #json.dump(cube2.toJson(), data, indent=2, separators=(",",':'))
+        data.write(str(cube.toJson()).replace("'", '"').replace('], "', '],\n  "').replace("[[", "[\n    [").replace(", [", ",\n    [").replace('{"', '{\n  "').replace("]]", "]\n  ]").replace("]}", "]\n}"))
